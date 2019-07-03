@@ -1,47 +1,28 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import "./styles.css";
-import nameVar from "./playground/es6-let-const";
+//In let You can't able to Redefine the variable.
+let nameLet = "Payal";
+nameLet = "krisha";
+console.log("NameLet", nameLet);
 
-console.log(nameVar);
+//You can't able to override value of const.
+const nameConst = "Payal";
+console.log("NameConst", nameConst);
 
-var app = {
-  name: "Indecision App",
-  description: "Put your life in the hand of computer",
-  options: ["one", "two"]
-};
-
-var template = (
-  <div>
-    <h1>{app.name}</h1>
-    {app.description && <p>{app.description}</p>}
-    <p>{app.options.length > 0 ? "Here is your options" : "No Options"}</p>
-    <ol>
-      <li>Item One</li>
-      <li>Item two</li>
-    </ol>
-  </div>
-);
-
-var user = {
-  name: "Payal",
-  age: 23,
-  location: "Ahmedabad"
-};
-function getLocation(location) {
-  if (location) {
-    return <p>Location : {location}</p>;
-  }
+function getPetName() {
+  var petName = "Payu";
+  return petName;
 }
-var templateTwo = (
-  <div>
-    <h1>{user.name ? user.name : "Anonymous"}</h1>
-    {user.age && user.age > 28 && <p>Age : {user.age}</p>}
-    {getLocation(user.location)}
-  </div>
-);
-var appRoot = document.getElementById("app");
-ReactDOM.render(template, appRoot);
 
-ReactDOM.render(templateTwo, appRoot);
+const petName = getPetName();
+console.log(petName);
+
+//Block Scoping
+var fullName = "PAyal Maradiya";
+let firstName;
+if (fullName) {
+  let firstName = fullName.split(" ")[0];
+  console.log(firstName);
+}
+console.log(firstName);

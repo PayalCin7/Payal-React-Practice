@@ -1,28 +1,32 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-//In let You can't able to Redefine the variable.
-let nameLet = "Payal";
-nameLet = "krisha";
-console.log("NameLet", nameLet);
+import "./styles.css";
 
-//You can't able to override value of const.
-const nameConst = "Payal";
-console.log("NameConst", nameConst);
+let count = 0;
+const addOne = () => {
+  count++;
+  renderCounterApp();
+};
+const minusOne = () => {
+  count--;
+  renderCounterApp();
+};
+const resetCount = () => {
+  count = 0;
+  renderCounterApp();
+};
+const renderCounterApp = () => {
+  const templateTwo = (
+    <div>
+      <h1>Count : {count} </h1>
+      <button onClick={addOne}>+1</button>
+      <button onClick={minusOne}>-1</button>
+      <button onClick={resetCount}>Reset</button>
+    </div>
+  );
+  var appRoot = document.getElementById("app");
+  ReactDOM.render(templateTwo, appRoot);
+};
 
-function getPetName() {
-  var petName = "Payu";
-  return petName;
-}
-
-const petName = getPetName();
-console.log(petName);
-
-//Block Scoping
-var fullName = "PAyal Maradiya";
-let firstName;
-if (fullName) {
-  let firstName = fullName.split(" ")[0];
-  console.log(firstName);
-}
-console.log(firstName);
+renderCounterApp();

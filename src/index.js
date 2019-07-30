@@ -3,30 +3,59 @@ import ReactDOM from "react-dom";
 
 import "./styles.css";
 
-let count = 0;
-const addOne = () => {
-  count++;
-  renderCounterApp();
-};
-const minusOne = () => {
-  count--;
-  renderCounterApp();
-};
-const resetCount = () => {
-  count = 0;
-  renderCounterApp();
-};
-const renderCounterApp = () => {
-  const templateTwo = (
-    <div>
-      <h1>Count : {count} </h1>
-      <button onClick={addOne}>+1</button>
-      <button onClick={minusOne}>-1</button>
-      <button onClick={resetCount}>Reset</button>
-    </div>
-  );
-  var appRoot = document.getElementById("app");
-  ReactDOM.render(templateTwo, appRoot);
+const app = {
+  name: "Indecision App",
+  description: "Put your life in the hand of computer",
+  options: []
 };
 
-renderCounterApp();
+const onFormSubmit = e => {
+  e.preventDefault();
+  const option = e.target.elements.option.value;
+
+  if (option) {
+    app.options.push(option);
+  }
+  e.target.elements.option.value = "";
+  renderApp();
+};
+
+const clearOption = () => {
+  app.options = [];
+  renderApp();
+};
+const onMakeDecision = () => {
+  const randomNum = Math.floor(Math.random() * app.options.length);
+  const option = app.options[randomNum];
+  alert(option);
+};
+const renderApp = () => {
+  const template = (
+    <div>
+      <h1>{app.name}</h1>
+      {app.description && <p>{app.description}</p>}
+      <p>{app.options.length > 0 ? "Here is your options" : "No Options"}</p>
+      <button
+        disabled={app.options.length > 0 ? false : true}
+        onClick={onMakeDecision}
+      >
+        What should I do?
+      </button>
+      <button onClick={clearOption}>All Clear</button>
+      <ol>
+        {app.options.map(option => (
+          <li key={option}>{option}</li>
+        ))}
+      </ol>
+      <form onSubmit={onFormSubmit}>
+        <input type="text" name="option" />
+        <button>Add Option</button>
+      </form>
+    </div>
+  );
+
+  const appRoot = document.getElementById("app");
+  ReactDOM.render(template, appRoot);
+};
+
+renderApp();
